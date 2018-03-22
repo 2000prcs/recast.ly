@@ -18,11 +18,14 @@ class App extends React.Component{
     super(props);
     this.state={
       allVideos: blankData,
-      currentVideo: blankData[0]
+      currentVideo: blankData[0],
+      autoplay : 0
+      
     };
     this.handleVideoClick = this.handleVideoClick.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.bounceSearch = this.debounceHandler(this.handleSearch);
+    this.handleAutoPlayClick = this.handleAutoPlayClick.bind(this);
   }
 
   componentDidMount(){
@@ -46,6 +49,10 @@ class App extends React.Component{
     });
   }
 
+  handleAutoPlayClick(){
+    this.setState({autoplay: (this.state.autoplay ? 0 : 1)});
+  }
+
   debounceHandler(func){
     var debounceFunc = _.debounce(func, 500);
     return function(e){
@@ -57,14 +64,15 @@ class App extends React.Component{
   render(){
     return (
       <div>
-        <nav className="navbar">
+        <nav className="navbar navbar-dark bg-dark">
           <div className="col-md-6 offset-md-3">
             <div><Search handleSearch={this.bounceSearch} /></div>
           </div>
+          <button className="btn btn-danger" data-toggle="button" aria-pressed="false" onClick={this.handleAutoPlayClick}>Auto Play</button>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={this.state.currentVideo}/></div>
+            <div><VideoPlayer video={this.state.currentVideo} autoplay={this.state.autoplay}/></div>
           </div>
           <div className="col-md-5">
             <div><VideoList callback={this.handleVideoClick} videos ={this.state.allVideos} /></div>
