@@ -1,6 +1,7 @@
 # Recast.ly
 
 Here's how the app is organized:
+
 <img src="https://user-images.githubusercontent.com/7968370/28292844-f256c5f6-6b05-11e7-8df2-f34061d2c2f0.png">
 
 1. App - The top level container for the entire application. This is the component that will be rendered to the DOM
